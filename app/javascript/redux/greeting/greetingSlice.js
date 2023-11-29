@@ -1,12 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL = "http://127.0.0.1:3000/api/v1/greeting";
-
-const getRandomGreeting = createAsyncThunk('greeting/getRandomGreeting', () => {
-  return fetch(URL)
-    .then((resp) => resp.json())
-    .catch((error) => console.log(error));
-});
+const getRandomGreeting = createAsyncThunk(
+  "greeting/getRandomGreeting",
+  async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:3000/api/v1/greeting");
+      console.log(response);
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+);
 
 const initialState = {
   greeting: '',

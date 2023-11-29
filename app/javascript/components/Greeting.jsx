@@ -13,11 +13,11 @@ const Greeting = () => {
     )  
   }
   
-  isLoading ? 'Loading....' : (
+  {isLoading ? 'Loading....' : (
     <>
        <div>{ greeting }</div>
     </>
-  );
+  );}
 }
 
 export default Greeting;
