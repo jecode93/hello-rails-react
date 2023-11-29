@@ -12,12 +12,20 @@ const Greeting = () => {
       </>
     )  
   }
+  if (isLoading) {
+    return (
+      <>
+        <h1>Loading....</h1>
+      </>
+    )
+  }
   
-  {isLoading ? 'Loading....' : (
-    <>
-       <div>{ greeting }</div>
+   return (
+     <>
+       <h1>Greeting from the API</h1>
+       <h3>{ greeting }</h3>
     </>
-  );}
+  );
 }
 
 export default Greeting;
