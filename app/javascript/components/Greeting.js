@@ -1,31 +1,41 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import getRandomGreeting from "../redux/greeting/greetingSlice";
+import { getRandomGreeting } from "../redux/greeting/greetingSlice";
 
 const Greeting = () => {
-  const { greeting, isLoading, error } = useSelector((state) => state.greeting);
+  const dispatch = useDispatch();
+  const { greeting, isLoading, error } = useSelector(
+    (state) => state.greetings
+  );
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(getRandomGreeting());
-    }, []);
+  useEffect(() => {
+    dispatch(getRandomGreeting());
+  }, [dispatch]);
   
   if (error) {
     return (
       <>
         <h2>Something went wront</h2>
-        
+        {error}
       </>
     );
   }
-
-  isLoading ? (
-    "Loading...."
-  ) : (
+  
+  if (isLoading) {
+    return (
+      <>
+        <h1>Loading....</h1>
+      </>
+    )
+  }
+  
+  return (
     <>
-      <div>{greeting}</div>
+      <div>
+        <h1>Greetings from the back end</h1>
+        <h2>{greeting.message}</h2>
+      </div>
     </>
   );
 };

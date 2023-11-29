@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { logger } from "redux-logger";
 import greetingReducer from "./greeting/greetingSlice";
 
 export const store = configureStore({
   reducer: {
-    greeting: greetingReducer,
+    greetings: greetingReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
