@@ -1,8 +1,15 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getRandomGreeting } from '../redux/greeting/greetingSlice';
 
 const Greeting = () => {
+  const dispatch = useDispatch();
   const { greeting, isLoading, error } = useSelector((state) => state.greeting);
+  
+
+  useEffect(() => {
+    dispatch(getRandomGreeting());
+  }, [dispatch]);
   
   if (error) {
     return (
